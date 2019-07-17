@@ -18,9 +18,16 @@ export default class Piece extends React.Component {
           dy: this.state.pan.y
         }
       ]),
-      onPanResponderRelease: (e, gesture) => {}
+      onPanResponderRelease: (e, gesture) => {
+        Animated.spring(this.state.pan, { toValue: { x: 0, y: 0 } }).start()
+      }
     })
   }
+
+  activatePiece = () => {
+    this.props.activatePiece()
+  }
+
   render() {
     let imgSource
     switch (this.props.pieceName) {

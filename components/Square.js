@@ -14,7 +14,6 @@ export default class Square extends React.Component {
     })
   }
   render() {
-    // const Square = ({ matrixID, squareID }) => {
     const styles = StyleSheet.create({
       light: {
         backgroundColor: '#fff',
@@ -36,7 +35,7 @@ export default class Square extends React.Component {
       <View
         style={squareColor}
         onLayout={this.findSquareCoords}
-        onTouchStart={() => console.log(squareID)}
+        onTouchStart={() => console.log(this.state.squareCoords)}
       />
     )
   }
