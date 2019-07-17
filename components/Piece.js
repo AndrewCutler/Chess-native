@@ -2,8 +2,7 @@ import React from 'react'
 import { pieces } from '../pieces'
 import { Image } from 'react-native'
 
-const Piece = ({ pieceName }) => {
-  // let imgSource = '../assets/pieces/wikipedia/bK.png'
+const Piece = ({ pieceName, grabPiece }) => {
   let imgSource
   switch (pieceName) {
     case 'bB':
@@ -43,7 +42,13 @@ const Piece = ({ pieceName }) => {
       imgSource = pieces.wR.uri
       break
   }
-  return <Image source={imgSource} style={{ width: 30, height: 30 }} />
+  return (
+    <Image
+      source={imgSource}
+      onTouchStart={() => grabPiece(pieceName)}
+      style={{ width: 32, height: 32 }}
+    />
+  )
 }
 
 export default Piece
