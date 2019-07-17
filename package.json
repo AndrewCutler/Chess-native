@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "devtools": "react-devtools"
   },
   "dependencies": {
     "expo": "^33.0.0",
@@ -16,7 +17,8 @@
     "sharp-cli": "^1.10.0"
   },
   "devDependencies": {
-    "babel-preset-expo": "^5.1.1"
+    "babel-preset-expo": "^5.1.1",
+    "electron": "5.0.7"
   },
   "private": true
 }
