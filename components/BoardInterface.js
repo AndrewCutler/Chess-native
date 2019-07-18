@@ -8,7 +8,7 @@ export default class BoardInterface extends React.Component {
     super()
     this.state = {
       board: [],
-      activePiece: ''
+      activePiece: null
     }
   }
 
@@ -24,10 +24,14 @@ export default class BoardInterface extends React.Component {
       // total height = 364 + 72 = 436
       <View
         style={{ height: 436 }}
-        onTouchStart={() => console.log(this.state.board)}
+        // onTouchStart={() => console.log(this.state.board)}
+        onTouchStart={() => console.log(this.state.activePiece)}
       >
         {/* PieceList height: 36 * 2 = 72 */}
-        <PieceList color='b' />
+        <PieceList
+          color='b'
+          setActivePiece={p => this.setState({ activePiece: p })}
+        />
         {/* board height = 364 */}
         <Board propagateCoords={this.saveSquareCoords} />
         <PieceList color='w' />

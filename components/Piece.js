@@ -12,6 +12,10 @@ export default class Piece extends React.Component {
 
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => true,
+      onPanResponderGrant: (e, gesture) => {
+        // save active piece
+        this.props.setActivePiece(this.props.pieceName)
+      },
       onPanResponderMove: Animated.event([
         null,
         {
@@ -20,6 +24,8 @@ export default class Piece extends React.Component {
         }
       ]),
       onPanResponderRelease: (e, gesture) => {
+        //unset active piece on drop
+        this.props.setActivePiece('')
         if (this.props.square !== '') {
           Animated.spring(this.state.pan, { toValue: { x: 0, y: 0 } }).start()
         } else {

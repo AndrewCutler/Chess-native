@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import Piece from './Piece'
 
-const PieceList = ({ color }) => {
+const PieceList = ({ color, setActivePiece }) => {
   const styles = StyleSheet.create({
     pieces: {
       height: 36,
@@ -13,22 +13,22 @@ const PieceList = ({ color }) => {
   return (
     <View style={styles.pieces}>
       <View>
-        <Piece pieceName={`${color}P`} />
+        <Piece pieceName={`${color}P`} setActivePiece={setActivePiece} />
       </View>
       <View>
-        <Piece pieceName={`${color}B`} />
+        <Piece pieceName={`${color}B`} setActivePiece={setActivePiece} />
       </View>
       <View>
-        <Piece pieceName={`${color}K`} />
+        <Piece pieceName={`${color}K`} setActivePiece={setActivePiece} />
       </View>
       <View>
-        <Piece pieceName={`${color}Q`} />
+        <Piece pieceName={`${color}Q`} setActivePiece={setActivePiece} />
       </View>
       <View>
-        <Piece pieceName={`${color}R`} />
+        <Piece pieceName={`${color}R`} setActivePiece={setActivePiece} />
       </View>
       <View>
-        <Piece pieceName={`${color}N`} />
+        <Piece pieceName={`${color}N`} setActivePiece={setActivePiece} />
       </View>
     </View>
   )
