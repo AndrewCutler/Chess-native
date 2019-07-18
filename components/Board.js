@@ -1,9 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View } from 'react-native'
 import Square from './Square'
-import { AuthSession } from 'expo'
 
-export default function Board() {
+const Board = ({ propagateCoords }) => {
   const squareMatrix = []
   const squares = [
     'a8',
@@ -79,6 +78,7 @@ export default function Board() {
           matrixID={{ rank: i, file: j }}
           key={squares[squareIndex]}
           squareID={squares[squareIndex]}
+          propagateCoords={propagateCoords}
         />
       )
       squareIndex++
@@ -94,10 +94,13 @@ export default function Board() {
         width: 364,
         height: 364,
         borderColor: '#111',
-        borderWidth: 2
+        borderWidth: 2,
+        zIndex: -10
       }}
     >
       {squareMatrix}
     </View>
   )
 }
+
+export default Board

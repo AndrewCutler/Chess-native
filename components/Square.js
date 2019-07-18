@@ -8,11 +8,17 @@ export default class Square extends React.Component {
       squareCoords: null
     }
   }
+
   findSquareCoords = e => {
-    this.setState({
-      squareCoords: e.nativeEvent.layout
-    })
+    const coords = { x: e.nativeEvent.layout.x, y: e.nativeEvent.layout.y }
+    this.props.propagateCoords(this.props.squareID, coords)
   }
+
+  isOverSquare(gesture) {
+    let area = this.state.squareCoords
+    return gesture.moveY > area.y && gesture.moveY < area.y + area.height
+  }
+
   render() {
     const styles = StyleSheet.create({
       light: {
@@ -26,6 +32,7 @@ export default class Square extends React.Component {
         height: 45
       }
     })
+
     const squareColor =
       this.props.matrixID.rank % 2 === this.props.matrixID.file % 2
         ? styles.light
@@ -34,8 +41,8 @@ export default class Square extends React.Component {
     return (
       <View
         style={squareColor}
+        // onTouchStart={() => console.log(this.state.squareCoords)}
         onLayout={this.findSquareCoords}
-        onTouchStart={() => console.log(this.state.squareCoords)}
       />
     )
   }

@@ -1,12 +1,13 @@
 import React from 'react'
 import { pieces } from '../pieces'
-import { Image, StyleSheet, PanResponder, Animated } from 'react-native'
+import { View, StyleSheet, PanResponder, Animated } from 'react-native'
 
 export default class Piece extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      pan: new Animated.ValueXY()
+      pan: new Animated.ValueXY(),
+      pieceCoords: null
     }
 
     this.panResponder = PanResponder.create({
@@ -19,8 +20,20 @@ export default class Piece extends React.Component {
         }
       ]),
       onPanResponderRelease: (e, gesture) => {
-        Animated.spring(this.state.pan, { toValue: { x: 0, y: 0 } }).start()
+        if (this.props.square !== '') {
+          Animated.spring(this.state.pan, { toValue: { x: 0, y: 0 } }).start()
+        } else {
+          Animated.spring(this.state.pan, {
+            toValue: { x: this.state.pan.x, y: this.state.pan.y }
+          }).start()
+        }
       }
+    })
+  }
+
+  findPieceCoords = e => {
+    this.setState({
+      pieceCoords: e.nativeEvent.layout
     })
   }
 
@@ -77,11 +90,13 @@ export default class Piece extends React.Component {
     })
 
     return (
-      <Animated.Image
-        source={imgSource}
-        {...this.panResponder.panHandlers}
-        style={[this.state.pan.getLayout(), styles.piece]}
-      />
+      <View onLayout={this.findPieceCoords}>
+        <Animated.Image
+          source={imgSource}
+          {...this.panResponder.panHandlers}
+          style={[this.state.pan.getLayout(), styles.piece]}
+        />
+      </View>
     )
   }
 }
