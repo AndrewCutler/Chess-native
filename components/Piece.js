@@ -24,6 +24,8 @@ export default class Piece extends React.Component {
         }
       ]),
       onPanResponderRelease: (e, gesture) => {
+        //check if square is valid
+        this.props.occupySquare(this.props.pieceName)
         //unset active piece on drop
         this.props.setActivePiece('')
         if (this.props.square !== '') {
@@ -41,10 +43,6 @@ export default class Piece extends React.Component {
     this.setState({
       pieceCoords: e.nativeEvent.layout
     })
-  }
-
-  activatePiece = () => {
-    this.props.activatePiece()
   }
 
   render() {

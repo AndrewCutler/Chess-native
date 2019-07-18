@@ -14,11 +14,6 @@ export default class Square extends React.Component {
     this.props.propagateCoords(this.props.squareID, coords)
   }
 
-  isOverSquare(gesture) {
-    let area = this.state.squareCoords
-    return gesture.moveY > area.y && gesture.moveY < area.y + area.height
-  }
-
   render() {
     const styles = StyleSheet.create({
       light: {

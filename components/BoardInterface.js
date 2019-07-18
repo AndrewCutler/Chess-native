@@ -8,6 +8,7 @@ export default class BoardInterface extends React.Component {
     super()
     this.state = {
       board: [],
+      zones: [],
       activePiece: null
     }
   }
@@ -15,8 +16,21 @@ export default class BoardInterface extends React.Component {
   //save square coords and name to state
   saveSquareCoords = (squareName, coords) => {
     this.setState({
-      board: [...this.state.board, [squareName, coords]]
+      board: [...this.state.board, [squareName, coords]],
+      zones: [...this.state.zones, coords]
     })
+  }
+
+  //check if piece dropped over square, and if so which one
+  isOverSquare(gesture) {
+    let area = this.state.squareCoords
+    return gesture.moveY > area.y && gesture.moveY < area.y + area.height
+  }
+
+  //save piece on square
+  occupySquare = piece => {
+    //drop piece on hovered over square
+    console.log('droppinp ' + piece)
   }
 
   render() {
@@ -24,17 +38,21 @@ export default class BoardInterface extends React.Component {
       // total height = 364 + 72 = 436
       <View
         style={{ height: 436 }}
-        // onTouchStart={() => console.log(this.state.board)}
-        onTouchStart={() => console.log(this.state.activePiece)}
+        onTouchStart={() => console.log(this.state.zones)}
       >
         {/* PieceList height: 36 * 2 = 72 */}
         <PieceList
+          occupySquare={this.occupySquare}
           color='b'
           setActivePiece={p => this.setState({ activePiece: p })}
         />
         {/* board height = 364 */}
         <Board propagateCoords={this.saveSquareCoords} />
-        <PieceList color='w' />
+        <PieceList
+          occupySquare={this.occupySquare}
+          color='w'
+          setActivePiece={p => this.setState({ activePiece: p })}
+        />
       </View>
     )
   }
